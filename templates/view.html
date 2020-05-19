@@ -1,0 +1,179 @@
+<!-- 
+    Author: Caroline Hoang
+    JS functionality for the view page to view producer info by id
+    at the /view/<idVal> route
+    [A UI Design Class Assignment]
+-->
+
+<!DOCTYPE html>
+
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>View Producer</title>
+
+        <!-- jquery -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script> 
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 	 
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> 
+
+
+        <!-- This is a plain html page that does not require js because it's filled through templating -->
+        <!-- <script  type="text/javascript" src="{{ url_for('static', filename = 'view.js') }}" ></script> -->
+
+        <!-- variables being passed for get requests -->
+        
+        <script>
+            var idVal = {{idVal|tojson}};
+            // var display_producers = {{display_producers|tojson}};
+            // var test = {display_producers}|tojson
+            var display_producers = {{display_producers|tojson}};
+            var display_producers2 = {{display_producers|tojson}};
+            
+            $(document).ready(function(){
+                // var display_producers = {display_producers};   
+                console.log("the name isgbbb: " + display_producers);
+                console.log(display_producers[0]["profileImg"]); 
+                var display_vocaloids = display_producers[0]['vocaloids']; 
+                console.log("vocaloids1:   "+ display_vocaloids );  
+                console.log("vocaloids2:   "+ display_producers[0]['vocaloids']);
+                $("#vocal").text(display_vocaloids)  
+                // var display_vocaloids = display_producers[0]['vocaloids'];       
+            });
+            // var name = display_producers[0].name;
+            // console.log("the name is: " + display_producers);
+            // console.log(display_producers2, test);
+        </script>
+
+
+
+    <style> 
+        body{
+            font-size: 1rem;
+            padding-bottom: 10vw;
+            
+        }
+        .container{
+            width: 95vw;
+            max-width: 95vw;
+        }
+        .header{
+                width: 100%;
+                height: 100%;
+                background-color: lightgrey;
+                font-size: 2.5rem;
+                padding: 8vh 0 8vh 5vw;
+                font-weight: bold;
+
+        }
+        .starting-column{
+            padding-left: 0 !important;
+            margin-left:  0 !important;
+        }
+        .profile-img{
+            width:100%;
+        }
+        .form-fields{
+            overflow-wrap: break-word;
+            hyphens: auto;
+            margin-top: 5vh;
+        }
+        
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+    <div class="container">
+
+        <div class="container">
+            <div class="row">
+                <div class="header col-md-12" >
+                    View Profile
+                </div>
+                
+            </div>
+    
+    
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Producer Name:  
+                </div>
+                <div class="col-md-6" > 
+                    {{display_producers[0]['name']}}
+                </div>
+            </div>
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Profile Image:
+                </div>
+                <div class="col-md-6" > 
+                    <img src="{{display_producers[0]['profileImg']}}" class="profile-img" />
+                </div>
+            </div>
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Description:
+                </div>
+                <div class="col-md-6" > 
+                    {{display_producers[0]['desc']}}
+                </div>
+                <div class="col-md-2"> 
+                    <a href="/../edit/{{idVal}}"> <button id="update-entry3" class="update" value="name" idVal="{{idVal}}">edit</button></a>
+                </div>
+            </div>
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Starting Year:
+                </div>
+                <div class="col-md-6" > 
+                    {{display_producers[0]['startYear']}}
+                </div>
+            </div>
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Number of Songs:
+                </div>
+                <div class="col-md-6" > 
+                    {{display_producers[0]['songNum']}}
+                </div>
+            </div>
+            <div class="row form-fields">
+                <div class="col-md-2 starting-column" > 
+                    Vocaloids Used:
+                </div>
+                <div id="vocal" class="col-md-6" > 
+                </div>
+            </div>
+
+    
+        </div>
+  
+
+    </div>
+
+
+</body>
+
+
+
+
+
+
+
+
+
+</html>
